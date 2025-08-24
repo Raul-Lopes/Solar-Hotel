@@ -1,0 +1,59 @@
+<div>
+    <h2>Register</h2>
+    <p *ngIf="message" class="error">{{ message }}</p>
+    
+    <form (ngSubmit)="handleSubmit()">
+      <input
+        type="text"
+        [(ngModel)]="formData.firstName"
+        name="firstName"
+        placeholder="First Name"
+        required
+      />
+      <input
+        type="text"
+        [(ngModel)]="formData.lastName"
+        name="lastName"
+        placeholder="Last Name"
+        required
+      />
+      <input
+        type="email"
+        [(ngModel)]="formData.email"
+        name="email"
+        placeholder="Email"
+        required
+      />
+      <input
+        type="password"
+        [(ngModel)]="formData.password"
+        name="password"
+        placeholder="Password"
+        required
+      />
+      <input
+        type="tel"
+        [(ngModel)]="formData.phoneNumber"
+        name="phoneNumber"
+        placeholder="Phone Number here"
+        required
+      />
+      <input
+        type="text"
+        [(ngModel)]="formData.role"
+        name="role"
+        placeholder="Role"
+        required
+      />
+  
+      <button type="submit">Register</button>
+    </form>
+    <p>
+      Already have an account?<a
+        routerLink="/login"
+        routerLinkActive="router-link-active"
+        >Login</a
+      >
+    </p>
+  </div>
+  
