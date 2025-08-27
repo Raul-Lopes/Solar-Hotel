@@ -19,7 +19,6 @@ import java.time.LocalDateTime;
 @Builder
 public class Notification {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

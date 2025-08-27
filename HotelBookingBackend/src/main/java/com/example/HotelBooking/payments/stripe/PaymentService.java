@@ -27,6 +27,7 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 public class PaymentService {
 
+    public static final String USD = "usd";
     private final BookingRepository bookingRepository;
     private final PaymentRepository paymentRepository;
     private final NotificationService emailService;
@@ -51,14 +52,29 @@ public class PaymentService {
         }
 
         if (booking.getTotalPrice().compareTo(paymentRequest.getAmount()) != 0){
-            throw new NotFoundException("Payment Amount Does Not Tally. Please Contact Out Customer Support Agent");
+            throw new NotFoundException("The payment amount doesn't match. Please contact our customer support agent.");
         }
 
         try {
+            /*
+            https://docs.stripe.com/testing?testing-method=payment-methods#visa
+            Visa	                    pm_card_visa
+            Visa (debit)	            pm_card_visa_debit
+            Mastercard	                pm_card_mastercard
+            Mastercard (debit)	        pm_card_mastercard_debit
+            Mastercard (prepaid)	    pm_card_mastercard_prepaid
+            American Express	        pm_card_amex
+            Discover	                pm_card_discover
+            Diners Club	                pm_card_diners
+            JCB	pm_card_jcb UnionPay    pm_card_unionpay
+            */
             PaymentIntentCreateParams params = PaymentIntentCreateParams.builder()
                     .setAmount(paymentRequest.getAmount().multiply(BigDecimal.valueOf(100)).longValue()) // converting to cent
-                    .setCurrency("usd")
+                    .setCurrency(USD)
+                    .setPaymentMethod("pm_card_mastercard")
+                    .setReceiptEmail("xxxx@yahoo.com.br")
                     .putMetadata("bookingReference", bookingReference)
+                    .addPaymentMethodType("card")
                     .build();
 
             PaymentIntent intent = PaymentIntent.create(params);
@@ -76,6 +92,7 @@ public class PaymentService {
     }
 
     public void updatePaymentBooking(PaymentRequest paymentRequest){
+
         log.info("inside updatePaymentBooking()");
 
         String bookingReference = paymentRequest.getBookingReference();
@@ -96,7 +113,7 @@ public class PaymentService {
             payment.setFailureReason(paymentRequest.getFailureReason());
         }
 
-        paymentRepository.save(payment); //save to our payment table
+        paymentRepository.save(payment); //save to payment table
 
         //create and send notification via email
         NotificationDTO notificationDTO = NotificationDTO.builder()
@@ -111,7 +128,8 @@ public class PaymentService {
             bookingRepository.save(booking); //Update Booking Status To SUCCESFUL
 
             notificationDTO.setSubject("BOOKING PAYMENT SUCCESSFUL");
-            notificationDTO.setBody("Congratulations!! Your payment for booking with reference: " + bookingReference + "is successful");
+            notificationDTO.setBody("Congratulations!!" +
+                    "\nYour payment for booking with reference: " + bookingReference + " is successful");
             emailService.sendEmail(notificationDTO);
 
         }else{
@@ -120,7 +138,7 @@ public class PaymentService {
             bookingRepository.save(booking); //UPDATE THE BOOKING
 
             notificationDTO.setSubject("BOOKING PAYMENT FAILED");
-            notificationDTO.setBody("Your Payment for booking with reference: " + bookingReference + " failed with reason: " + paymentRequest.getFailureReason());
+            notificationDTO.setBody("Your Payment for booking with reference: " + bookingReference + " failed. \nReason: " + paymentRequest.getFailureReason());
             emailService.sendEmail(notificationDTO);
 
         }

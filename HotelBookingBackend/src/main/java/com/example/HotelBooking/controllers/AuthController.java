@@ -1,6 +1,5 @@
 package com.example.HotelBooking.controllers;
 
-
 import com.example.HotelBooking.dtos.LoginRequest;
 import com.example.HotelBooking.dtos.RegistrationRequest;
 import com.example.HotelBooking.dtos.Response;

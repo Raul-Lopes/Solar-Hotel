@@ -34,6 +34,7 @@ public class PaymentDTO {
     private PaymentStatus status; //failed, e.t.c
 
     private String bookingReference;
+
     private String failureReason;
 
     private String approvalLink; //paypal payment approval UEL

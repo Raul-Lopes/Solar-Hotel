@@ -12,12 +12,8 @@ import java.util.Optional;
 
 public interface BookingRepository extends JpaRepository<Booking, Long> {
 
-
     List<Booking> findByUserId(Long userId); // Fetch all bookings for a specific user
-
-
     Optional<Booking> findByBookingReference(String bookingReference);
-
 
     @Query("""
                SELECT CASE WHEN COUNT(b) = 0 THEN true ELSE false END

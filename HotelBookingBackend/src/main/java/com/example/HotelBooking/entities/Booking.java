@@ -19,7 +19,6 @@ import java.time.LocalDate;
 @Builder
 public class Booking {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -44,8 +43,5 @@ public class Booking {
 
     @Enumerated(EnumType.STRING)
     private BookingStatus bookingStatus;
-
-
-
 
 }

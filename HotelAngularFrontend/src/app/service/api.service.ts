@@ -35,7 +35,6 @@ export class ApiService {
     }
   }
 
-
   //clear authentication data
   private clearAuth(): void {
     localStorage.removeItem('token');

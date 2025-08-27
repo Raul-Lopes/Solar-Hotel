@@ -22,7 +22,7 @@ export class PaymentpageComponent {
   elements: StripeElements | null = null;
   cardElement: StripeCardElement | null = null;
 
-  clientSecret: any = null; //uniue transaction id for very transaction
+  clientSecret: any = null; //unique transaction id for very transaction
   error: any = null;
   processing: boolean = false;
 
@@ -40,9 +40,10 @@ export class PaymentpageComponent {
     this.bookingReference = this.route.snapshot.paramMap.get('bookingReference');
     this.amount = parseFloat(this.route.snapshot.paramMap.get('amount') || '0');
 
-    //load andn initialize the strip.js
+    //load and initialize the strip.js
     this.stripe = await loadStripe(
-      'pk_test_51QUUt8HB3OLSUETB41PkCNVZvXQdjyIJx4n7u9EHrMUH0j3R5VAJE76l1fnwQbC3OJlkPwQDIi0KwXGjdU1phB3s00ZJEZOlbv'
+      //Publishable key
+      'pk_test_51S01ttIPGtfC4sRc3Gs74p4tAowY48GCLxKnNUObxdWemqBZ1mu1ZpBSClA5ZXoYPIEXcFzcNEZzmCEre5ZbKlKu00O6dJrWHq'
     );
 
     if (this.stripe) {
@@ -63,13 +64,11 @@ export class PaymentpageComponent {
     this.apiService.proceedForPayment(paymentData).subscribe({
       next: (res: any) => {
         this.clientSecret = res.transactionId;
-        console.log(
-          'Transactio  ID or CLient Secrete is: ' + res.transactionId
-        );
+        console.log('Transaction  ID or CLient Secrete is: ' + res.transactionId);
       },
       error: (err: any) => {
         this.showError(
-          err?.error?.message || 'failed to fetch transaction uniwue secrete '
+          err?.error?.message || 'failed to fetch transaction unique secrete'
         );
       },
     });
@@ -87,8 +86,13 @@ export class PaymentpageComponent {
     event.preventDefault();
     console.log("PAY Button was clicked")
 
+    console.log(this.stripe)
+    console.log(this.elements)
+    console.log(this.clientSecret)
+    console.log(this.processing)
+
     if (!this.stripe || !this.elements || !this.clientSecret || this.processing) {
-      this.showError("Please fill in your card details properly")
+      this.showError("Please fill in your card details properly.")
       return;
     }
 
