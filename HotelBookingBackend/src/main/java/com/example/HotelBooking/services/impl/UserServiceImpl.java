@@ -46,6 +46,7 @@ public class UserServiceImpl implements UserService {
         User userToSave = User.builder()
                 .firstName(registrationRequest.getFirstName())
                 .lastName(registrationRequest.getLastName())
+                .birthDate(registrationRequest.getBirthDate())
                 .email(registrationRequest.getEmail())
                 .password(passwordEncoder.encode(registrationRequest.getPassword()))
                 .phoneNumber(registrationRequest.getPhoneNumber())
@@ -142,6 +143,7 @@ public class UserServiceImpl implements UserService {
         if (userDTO.getEmail() != null) existingUser.setEmail(userDTO.getEmail());
         if (userDTO.getFirstName() != null) existingUser.setFirstName(userDTO.getFirstName());
         if (userDTO.getLastName() != null) existingUser.setLastName(userDTO.getLastName());
+        if (userDTO.getBirthDate() != null) existingUser.setBirthDate(userDTO.getBirthDate());
         if (userDTO.getPhoneNumber() != null) existingUser.setPhoneNumber(userDTO.getPhoneNumber());
 
         if (userDTO.getPassword() != null && !userDTO.getPassword().isEmpty()) {

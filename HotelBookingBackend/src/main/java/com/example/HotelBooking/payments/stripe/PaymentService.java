@@ -45,10 +45,10 @@ public class PaymentService {
         String bookingReference = paymentRequest.getBookingReference();
 
         Booking booking = bookingRepository.findByBookingReference(bookingReference)
-                .orElseThrow(() -> new NotFoundException("Booking Not Found"));
+                .orElseThrow(() -> new NotFoundException("Booking not found"));
 
         if (booking.getPaymentStatus() == PaymentStatus.COMPLETED){
-            throw new NotFoundException("Payment Already Made For This Booking");
+            throw new NotFoundException("Payment already made for this booking");
         }
 
         if (booking.getTotalPrice().compareTo(paymentRequest.getAmount()) != 0){
@@ -87,7 +87,7 @@ public class PaymentService {
                     .build();
 
         }catch (Exception e){
-            throw new RuntimeException("Error Creating payment unique transaction id");
+            throw new RuntimeException("Error creating payment unique transaction id.");
         }
     }
 

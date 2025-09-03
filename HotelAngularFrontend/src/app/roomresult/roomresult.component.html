@@ -6,7 +6,7 @@
 
       <div class="details">
         <h3>{{ room.type }}</h3>
-        <p>Price: ${{ room.pricePerNight }}/Night</p>
+        <p>Price: {{ room.pricePerNight | currency}}/Night</p>
         <p>Description: {{ room.description }}</p>
       </div>
 

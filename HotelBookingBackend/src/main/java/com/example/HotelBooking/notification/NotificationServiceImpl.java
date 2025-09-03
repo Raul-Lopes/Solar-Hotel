@@ -19,7 +19,6 @@ public class NotificationServiceImpl implements NotificationService {
     private final JavaMailSender javaMailSender;
     private final NotificationRepository notificationRepository;
 
-
     @Override
     @Async
     public void sendEmail(NotificationDTO notificationDTO) {

@@ -42,7 +42,7 @@ export class PaymentpageComponent {
 
     //load and initialize the strip.js
     this.stripe = await loadStripe(
-      //Publishable key
+      //Stripe Publishable key
       'pk_test_51S01ttIPGtfC4sRc3Gs74p4tAowY48GCLxKnNUObxdWemqBZ1mu1ZpBSClA5ZXoYPIEXcFzcNEZzmCEre5ZbKlKu00O6dJrWHq'
     );
 
@@ -85,11 +85,6 @@ export class PaymentpageComponent {
   async handleSubmit(event: Event) {
     event.preventDefault();
     console.log("PAY Button was clicked")
-
-    console.log(this.stripe)
-    console.log(this.elements)
-    console.log(this.clientSecret)
-    console.log(this.processing)
 
     if (!this.stripe || !this.elements || !this.clientSecret || this.processing) {
       this.showError("Please fill in your card details properly.")

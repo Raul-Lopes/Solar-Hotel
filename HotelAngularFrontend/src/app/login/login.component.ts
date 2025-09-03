@@ -11,16 +11,16 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  
-  constructor( private apiService: ApiService, private router: Router){}
-  
+
+  constructor(private apiService: ApiService, private router: Router) { }
+
   formData: any = {
     email: '',
     password: ''
   }
   error: any = null;
 
-  async handleSubmit(){
+  async handleSubmit() {
 
     console.log("hanlde submit is called for login.")
 
@@ -30,7 +30,7 @@ export class LoginComponent {
     }
 
     this.apiService.loginUser(this.formData).subscribe({
-      next: (res:any) => {
+      next: (res: any) => {
         if (res.status === 200) {
           this.apiService.encryptAndSaveToStorage('token', res.token);
           this.apiService.encryptAndSaveToStorage('role', res.role);
@@ -43,9 +43,9 @@ export class LoginComponent {
     });
   }
 
-  showError(msg: string){
+  showError(msg: string) {
     this.error = msg;
-    setTimeout(()=> {
+    setTimeout(() => {
       this.error = null
     }, 4000);
   }

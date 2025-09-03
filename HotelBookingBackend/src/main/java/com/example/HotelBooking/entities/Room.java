@@ -40,4 +40,5 @@ public class Room {
 
     private String imageUrl; //this will reference the room picture
 
+    //size
 }

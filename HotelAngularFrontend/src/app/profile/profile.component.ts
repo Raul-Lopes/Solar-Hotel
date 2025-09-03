@@ -16,7 +16,7 @@ export class ProfileComponent {
   bookings: any[] = [];
   error: any = null;
 
-  constructor(private apiService: ApiService, private router: Router) {}
+  constructor(private apiService: ApiService, private router: Router) { }
 
   ngOnInit(): void {
     this.fetchUserProfile();
@@ -35,8 +35,8 @@ export class ProfileComponent {
           error: (err) => {
             this.showError(
               err?.error?.message ||
-                err?.error ||
-                'Error getting my bookings: ' + err
+              err?.error ||
+              'Error getting my bookings: ' + err
             );
           },
         });
@@ -44,8 +44,8 @@ export class ProfileComponent {
       error: (err) => {
         this.showError(
           err?.error?.message ||
-            err?.error ||
-            'Error getting my profile info: ' + err
+          err?.error ||
+          'Error getting my profile info: ' + err
         );
       },
     });

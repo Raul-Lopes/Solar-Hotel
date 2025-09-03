@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `solar_hotel` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `solar_hotel`;
 -- MySQL dump 10.13  Distrib 8.0.41, for Win64 (x86_64)
 --
 -- Host: localhost    Database: solar_hotel
@@ -27,7 +29,7 @@ CREATE TABLE `booking_reference` (
   `reference_no` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UKrungrlmxl0917k5nh97o8saox` (`reference_no`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -36,7 +38,7 @@ CREATE TABLE `booking_reference` (
 
 LOCK TABLES `booking_reference` WRITE;
 /*!40000 ALTER TABLE `booking_reference` DISABLE KEYS */;
-INSERT INTO `booking_reference` VALUES (1,'4FYQAIEPBM');
+INSERT INTO `booking_reference` VALUES (4,'0CNGXJCQS5'),(1,'4FYQAIEPBM'),(2,'CTK0ZCX6IA'),(5,'IPVG3M2AGY'),(3,'TWHQTL1LCA'),(6,'UGWZG8Q238');
 /*!40000 ALTER TABLE `booking_reference` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -49,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-08-24 14:19:54
+-- Dump completed on 2025-09-08 21:31:17

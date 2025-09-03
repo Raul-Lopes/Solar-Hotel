@@ -31,6 +31,9 @@ public class User {
     private String firstName;
     private String lastName;
 
+    @Column(name="birth_date")
+    private LocalDate birthDate;
+
     @NotBlank(message = "phoneNumber is required")
     @Column(name = "phone_number")
     private String phoneNumber;

@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `solar_hotel` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `solar_hotel`;
 -- MySQL dump 10.13  Distrib 8.0.41, for Win64 (x86_64)
 --
 -- Host: localhost    Database: solar_hotel
@@ -32,7 +34,7 @@ CREATE TABLE `rooms` (
   `type` enum('DOUBLE','SINGLE','SUIT','TRIPLE') DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK7ljglxlj90ln3lbas4kl983m2` (`room_number`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +43,7 @@ CREATE TABLE `rooms` (
 
 LOCK TABLES `rooms` WRITE;
 /*!40000 ALTER TABLE `rooms` DISABLE KEYS */;
-INSERT INTO `rooms` VALUES (1,1,'Nice single room.','assets\\roons\\1.jpg',99.00,12,'SINGLE'),(2,2,'Double room nice view.','assets\\roons\\2.jpg',145.00,17,'DOUBLE');
+INSERT INTO `rooms` VALUES (1,1,'\'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy.','assets\\roons\\1.jpg',99.00,12,'SINGLE'),(2,2,'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using ','assets\\roons\\2.jpg',145.00,17,'DOUBLE'),(3,5,'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. ','assets\\roons\\3.jpg',568.00,234,'SUIT');
 /*!40000 ALTER TABLE `rooms` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-08-24 14:19:54
+-- Dump completed on 2025-09-08 21:31:17

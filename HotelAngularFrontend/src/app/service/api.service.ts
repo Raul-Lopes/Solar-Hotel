@@ -8,7 +8,7 @@ import CryptoJS from 'crypto-js';
 })
 export class ApiService {
   private static BASE_URL = 'http://localhost:7070/api';
-  private static ENCRYPTION_KEY = 'dennis-encryp-key';
+  private static ENCRYPTION_KEY = 'encryp-key';
 
   constructor(private http: HttpClient) { }
 

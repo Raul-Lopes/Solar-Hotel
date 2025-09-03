@@ -81,9 +81,7 @@ export class RoomsearchComponent implements OnInit {
       .subscribe({
         next: (resp: any) => {
           if (resp.rooms.length === 0) {
-            this.showError(
-              'Room type not currently available for the selected date'
-            );
+            this.showError('Room type not currently available for the selected date');
             return;
           }
           this.searchResults.emit(resp.rooms); // Emit the room data

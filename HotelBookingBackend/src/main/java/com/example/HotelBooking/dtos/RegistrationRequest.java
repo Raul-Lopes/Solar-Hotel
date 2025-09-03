@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -16,6 +18,9 @@ public class RegistrationRequest {
 
     @NotBlank(message = "LastName is required")
     private String lastName;
+
+    //@NotBlank(message = "Birthdate is required")
+    private LocalDate birthDate;
 
     @NotBlank(message = "Email is required")
     private String email;

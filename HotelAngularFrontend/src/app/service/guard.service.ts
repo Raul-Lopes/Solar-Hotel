@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -10,8 +9,7 @@ export class GuardService implements CanActivate {
 
   constructor(private apiService: ApiService, private router: Router) { }
 
-  canActivate(route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): boolean {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
 
     const requiresAdmin = route.data['requiresAdmin'] || false;
 

@@ -55,7 +55,6 @@ public class RoomController {
             @RequestParam (value = "imageFile", required = false)  MultipartFile imageFile,
             @RequestParam (value = "id", required = true) Long id
 
-
     ){
         RoomDTO roomDTO = RoomDTO.builder()
                 .id(id)

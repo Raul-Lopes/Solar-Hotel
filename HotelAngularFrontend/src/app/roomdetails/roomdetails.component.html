@@ -14,7 +14,7 @@
     <h3>{{ room?.type }}</h3>
     <p><strong>Room Number:</strong> {{ room?.roomNumber }}</p>
     <p><strong>Capacity:</strong> {{ room?.capacity }}</p>
-    <p><strong>Price:</strong> ${{ room?.pricePerNight }} / night</p>
+    <p><strong>Price:</strong> {{ room?.pricePerNight | currency }} / night</p>
     <p>{{ room?.description }}</p>
   </div>
 

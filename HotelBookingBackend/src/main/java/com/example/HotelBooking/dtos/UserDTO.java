@@ -20,20 +20,16 @@ import java.time.LocalDate;
 public class UserDTO {
 
     private Long id;
-
     private String email;
 
     @JsonIgnore
     private String password;
     private String firstName;
     private String lastName;
-
+    private LocalDate birthDate;
     private String phoneNumber;
-
     private UserRole role;
-
     private boolean active;
-
     private LocalDate createdAt;
 
 }

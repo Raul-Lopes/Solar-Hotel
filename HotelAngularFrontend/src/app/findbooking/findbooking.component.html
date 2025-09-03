@@ -8,21 +8,19 @@
 
   <!-- Search Section -->
   <div>
-    <input 
-      type="text" 
-      placeholder="Enter your booking confirmation code" [(ngModel)]="confirmationCode" 
-      required />
+    <input type="text" placeholder="Enter your booking confirmation code" [(ngModel)]="confirmationCode" required />
     <button (click)="handleSearch()">Find</button>
   </div>
 
   <!-- Booking Details -->
   <div *ngIf="bookingDetails" class="details">
+
     <h3>Booking Details</h3>
     <p><strong>Booking Code:</strong> {{ bookingDetails.bookingReference }}</p>
-    <p><strong>Check-in Date:</strong> {{ bookingDetails.checkInDate }}</p>
-    <p><strong>Check-out Date:</strong> {{ bookingDetails.checkOutDate }}</p>
+    <p><strong>Check-in Date:</strong> {{ bookingDetails.checkInDate | date }}</p>
+    <p><strong>Check-out Date:</strong> {{ bookingDetails.checkOutDate | date }}</p>
     <p><strong>Payment Status:</strong> {{ bookingDetails.paymentStatus }}</p>
-    <p><strong>Amount:</strong> {{ bookingDetails.totalPrice }}</p>
+    <p><strong>Amount:</strong> {{ bookingDetails.totalPrice | currency}}</p>
     <p><strong>Booking Status:</strong> {{ bookingDetails.bookingStatus }}</p>
 
     <hr />

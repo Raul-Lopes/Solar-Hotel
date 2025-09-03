@@ -17,6 +17,7 @@ export class AdminregisterComponent {
   formData: any = {
     firstName: '',
     lastName: '',
+    birthDate: '',
     email: '',
     phoneNumber: '',
     password: '',
@@ -30,6 +31,7 @@ export class AdminregisterComponent {
       !this.formData.email ||
       !this.formData.firstName ||
       !this.formData.lastName ||
+      !this.formData.birthDate ||
       !this.formData.phoneNumber ||
       !this.formData.password ||
       !this.formData.role
