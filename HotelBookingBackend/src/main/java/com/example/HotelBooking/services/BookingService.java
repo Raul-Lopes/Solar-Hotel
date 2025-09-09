@@ -11,4 +11,6 @@ public interface BookingService {
     Response findBookingBookingByReferenceNo(String bookingReference);
 
     Response updateBooking(BookingDTO bookingDTO);
+
+    Response deleteBooking(String bookingReference);
 }

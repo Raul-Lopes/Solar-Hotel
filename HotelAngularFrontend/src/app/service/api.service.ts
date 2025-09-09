@@ -136,6 +136,12 @@ export class ApiService {
     });
   }
 
+  deleteBooking(bookingId: String): Observable<any> {
+    return this.http.delete(`${ApiService.BASE_URL}/bookings/delete/${bookingId}`, {
+      headers: this.getHeader(),
+    });
+  }
+
   getBookingByReference(bookingCode: string): Observable<any> {
     return this.http.get(`${ApiService.BASE_URL}/bookings/${bookingCode}`);
   }

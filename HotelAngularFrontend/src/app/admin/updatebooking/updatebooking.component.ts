@@ -21,6 +21,7 @@ export class UpdatebookingComponent {
     paymentStatus: ''
   }; // Form state to update booking status
 
+  success: string = '';
   message = ""
   error = ""
 
@@ -81,12 +82,31 @@ export class UpdatebookingComponent {
         setTimeout(() => {
           this.message = ""; // Clear message after 3 seconds
           this.router.navigate(['/admin/manage-bookings']); // Navigate back to manage bookings page
-        }, 3000);
+        }, 5000);
       },
       (error) => {
         this.showError(error.error?.message || error.message);
       }
     );
+  }
+
+  handleDelete(): void {
+    const isDeleted = window.confirm("Do you want to delete this booking?")
+    if (!isDeleted) {
+      return;
+    }
+
+    this.apiService.deleteBooking(this.bookingDetails.bookingReference).subscribe({
+      next: (response) => {
+        this.success = 'Booking has been deleded successfully.';
+        setTimeout(() => {
+          this.router.navigate(['/admin/manage-bookings']); // Navigate back to manage bookings page
+        }, 5000);
+      },
+      error: (error) => {
+        this.showError(error?.error?.message || 'Error deleting booking');
+      }
+    });
   }
 
   // Check if the booking details are still loading

@@ -111,7 +111,7 @@ export class EditroomComponent {
         this.success = 'Room updated successfully.';
         setTimeout(() => {
           this.router.navigate(['/admin/manage-rooms']);
-        }, 3000);
+        }, 5000);
       },
       error: (error) => {
         this.showError(error?.error?.message || 'Error updating room');
@@ -127,7 +127,7 @@ export class EditroomComponent {
           this.success = 'Room deleted successfully.';
           setTimeout(() => {
             this.router.navigate(['/admin/manage-rooms']);
-          }, 3000);
+          }, 5000);
         },
         error: (error) => {
           this.showError(error?.error?.message || 'Error deleting room');

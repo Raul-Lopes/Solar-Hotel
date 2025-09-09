@@ -67,8 +67,16 @@
 
     <!-- Update Button -->
     <button (click)="handleUpdate()">Update Booking</button>
+
+    <!-- Delete Button - Disabled when paymentStatus is COMPLETED -->
+    <button (click)="handleDelete()" [disabled]="formState.paymentStatus === 'COMPLETED'">
+      Delete Booking
+    </button>
   </div>
 
+<div>
+
+</div>
   <!-- Loading state -->
   <div *ngIf="isLoading">
     <p>Loading booking details...</p>

@@ -4,6 +4,7 @@ import com.example.HotelBooking.dtos.BookingDTO;
 import com.example.HotelBooking.dtos.NotificationDTO;
 import com.example.HotelBooking.dtos.Response;
 import com.example.HotelBooking.entities.Booking;
+import com.example.HotelBooking.entities.BookingReference;
 import com.example.HotelBooking.entities.Room;
 import com.example.HotelBooking.entities.User;
 import com.example.HotelBooking.enums.BookingStatus;
@@ -11,6 +12,7 @@ import com.example.HotelBooking.enums.PaymentStatus;
 import com.example.HotelBooking.exceptions.InvalidBookingStateAndDateException;
 import com.example.HotelBooking.exceptions.NotFoundException;
 import com.example.HotelBooking.notification.NotificationService;
+import com.example.HotelBooking.respositories.BookingReferenceRepository;
 import com.example.HotelBooking.respositories.BookingRepository;
 import com.example.HotelBooking.respositories.RoomRepository;
 import com.example.HotelBooking.services.BookingCodeGenerator;
@@ -34,6 +36,7 @@ import java.util.List;
 public class BookingServiceImpl implements BookingService {
 
     private final BookingRepository bookingRepository;
+    private final BookingReferenceRepository bookingReferenceRepository;
     private final RoomRepository roomRepository;
     private final NotificationService notificationService;
     private final ModelMapper modelMapper;
@@ -45,9 +48,10 @@ public class BookingServiceImpl implements BookingService {
         List<Booking> bookingList = bookingRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
 
         List<BookingDTO> bookingDTOList = modelMapper
-                .map(bookingList, new TypeToken<List<BookingDTO>>() {}.getType());
+                .map(bookingList, new TypeToken<List<BookingDTO>>() {
+                }.getType());
 
-        for (BookingDTO bookingDTO: bookingDTOList){
+        for (BookingDTO bookingDTO : bookingDTOList) {
             bookingDTO.setUser(null);
             bookingDTO.setRoom(null);
         }
@@ -65,7 +69,7 @@ public class BookingServiceImpl implements BookingService {
         User currentUser = userService.getCurrentLoggedInUser();
 
         Room room = roomRepository.findById(bookingDTO.getRoomId())
-                .orElseThrow(()-> new NotFoundException("Room not found"));
+                .orElseThrow(() -> new NotFoundException("Room not found"));
 
         //VALIDATION: ENSURE CHECK IN date IS NOT BEFORE TODAY
         if (bookingDTO.getCheckInDate().isBefore(LocalDate.now())) {
@@ -128,7 +132,7 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public Response findBookingBookingByReferenceNo(String bookingReference) {
         Booking booking = bookingRepository.findByBookingReference(bookingReference)
-                .orElseThrow(()-> new NotFoundException("Booking Not Found"));
+                .orElseThrow(() -> new NotFoundException("Booking Not Found"));
         BookingDTO bookingDTO = modelMapper.map(booking, BookingDTO.class);
         return Response.builder()
                 .status(200)
@@ -143,13 +147,13 @@ public class BookingServiceImpl implements BookingService {
         if (bookingDTO.getId() == null) throw new NotFoundException("Booking Id Is Required");
 
         Booking existingBooking = bookingRepository.findById(bookingDTO.getId())
-                .orElseThrow(()-> new NotFoundException("Booking Not Found"));
+                .orElseThrow(() -> new NotFoundException("Booking Not Found"));
 
-        if (bookingDTO.getBookingStatus() != null){
+        if (bookingDTO.getBookingStatus() != null) {
             existingBooking.setBookingStatus(bookingDTO.getBookingStatus());
         }
 
-        if (bookingDTO.getPaymentStatus() != null){
+        if (bookingDTO.getPaymentStatus() != null) {
             existingBooking.setPaymentStatus(bookingDTO.getPaymentStatus());
         }
         bookingRepository.save(existingBooking);
@@ -160,9 +164,27 @@ public class BookingServiceImpl implements BookingService {
                 .build();
     }
 
-    private BigDecimal calculateTotalPrice(Room room, BookingDTO bookingDTO){
+    private BigDecimal calculateTotalPrice(Room room, BookingDTO bookingDTO) {
         BigDecimal pricePerNight = room.getPricePerNight();
         long days = ChronoUnit.DAYS.between(bookingDTO.getCheckInDate(), bookingDTO.getCheckOutDate());
         return pricePerNight.multiply(BigDecimal.valueOf(days));
+    }
+
+    @Override
+    public Response deleteBooking(String referenceNumber) {
+
+        Booking booking = bookingRepository.findByBookingReference(referenceNumber)
+                .orElseThrow(() -> new NotFoundException("Booking Not Found"));
+        bookingRepository.delete(booking);
+
+        BookingReference bookingReference = bookingReferenceRepository.findByReferenceNo(referenceNumber).
+                orElseThrow(() -> new NotFoundException("Booking Reference Not Found"));
+
+        bookingReferenceRepository.delete(bookingReference);
+
+        return Response.builder()
+                .status(200)
+                .message("Booking Deleted Successfully")
+                .build();
     }
 }
